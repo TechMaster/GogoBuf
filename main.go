@@ -2,10 +2,9 @@ package main
 
 import (
 	"context"
-	"log"
-
 	proto "github.com/TechMaster/GogoBuf/proto"
 	"github.com/micro/go-micro"
+	"log"
 )
 
 type Huy struct{}

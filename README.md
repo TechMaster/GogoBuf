@@ -146,14 +146,13 @@ service Greeter {
 }
 
 ```
+
+Lệnh biên dịch proto khi đã nhúng google/protobuf/descriptor.proto
 ```
 protoc -I=. -I=$GOPATH/src -I=$GOPATH/src/github.com/gogo/protobuf/protobuf \
---micro_out=. \
---gogoslick_out=\
-Mgoogle/protobuf/any.proto=github.com/gogo/protobuf/types,\
-Mgoogle/protobuf/duration.proto=github.com/gogo/protobuf/types,\
-Mgoogle/protobuf/struct.proto=github.com/gogo/protobuf/types,\
-Mgoogle/protobuf/timestamp.proto=github.com/gogo/protobuf/types,\
-Mgoogle/protobuf/wrappers.proto=github.com/gogo/protobuf/types:. \
+--micro_out=\
+Mgoogle/protobuf/descriptor.proto=github.com/golang/protobuf/protoc-gen-go/descriptor:. \
+--gogofaster_out=\
+Mgoogle/protobuf/descriptor.proto=github.com/golang/protobuf/protoc-gen-go/descriptor:. \
 greeter.proto
 ```
