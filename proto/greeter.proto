@@ -1,10 +1,20 @@
 syntax = "proto2";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+import "google/protobuf/descriptor.proto";
+
+extend google.protobuf.MethodOptions {
+	optional string description = 50056;
+	optional bool internalMethod = 50057;
+}
 
 service Greeter {
 	rpc Hello(HelloRequest) returns (HelloResponse) {}
 	rpc GoodBye(HelloRequest) returns (HelloResponse) {}
+	rpc VuiQua(HelloRequest) returns (HelloResponse) {
+		option(description) = "VuiQua Day";
+		option(internalMethod) = false;
+	}
 }
 
 message HelloRequest {
@@ -26,7 +36,6 @@ message Permission {
 	// Method có phải là public hay không
 	required bool is_public = 4;
 }
-
 
 message HelloResponse {
 	optional string greeting = 2;

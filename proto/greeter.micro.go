@@ -18,6 +18,7 @@ import proto "github.com/golang/protobuf/proto"
 import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
+import _ "github.com/golang/protobuf/protoc-gen-go/descriptor"
 
 import (
 	client "github.com/micro/go-micro/client"
@@ -46,6 +47,7 @@ var _ server.Option
 type GreeterClient interface {
 	Hello(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error)
 	GoodBye(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error)
+	VuiQua(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error)
 }
 
 type greeterClient struct {
@@ -86,11 +88,22 @@ func (c *greeterClient) GoodBye(ctx context.Context, in *HelloRequest, opts ...c
 	return out, nil
 }
 
+func (c *greeterClient) VuiQua(ctx context.Context, in *HelloRequest, opts ...client.CallOption) (*HelloResponse, error) {
+	req := c.c.NewRequest(c.serviceName, "Greeter.VuiQua", in)
+	out := new(HelloResponse)
+	err := c.c.Call(ctx, req, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // Server API for Greeter service
 
 type GreeterHandler interface {
 	Hello(context.Context, *HelloRequest, *HelloResponse) error
 	GoodBye(context.Context, *HelloRequest, *HelloResponse) error
+	VuiQua(context.Context, *HelloRequest, *HelloResponse) error
 }
 
 func RegisterGreeterHandler(s server.Server, hdlr GreeterHandler, opts ...server.HandlerOption) {
@@ -107,4 +120,8 @@ func (h *Greeter) Hello(ctx context.Context, in *HelloRequest, out *HelloRespons
 
 func (h *Greeter) GoodBye(ctx context.Context, in *HelloRequest, out *HelloResponse) error {
 	return h.GreeterHandler.GoodBye(ctx, in, out)
+}
+
+func (h *Greeter) VuiQua(ctx context.Context, in *HelloRequest, out *HelloResponse) error {
+	return h.GreeterHandler.VuiQua(ctx, in, out)
 }

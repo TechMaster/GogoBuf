@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	proto "github.com/micro/examples/helloworld/proto"
+	proto "github.com/TechMaster/GogoBuf/proto"
 	"github.com/micro/go-micro"
 )
 
@@ -17,6 +17,10 @@ func (g *Huy) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto.Hel
 
 func (g *Huy) GoodBye(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
 
+	return nil
+}
+
+func (g *Huy) VuiQua(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
 	return nil
 }
 
