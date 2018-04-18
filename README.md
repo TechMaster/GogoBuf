@@ -95,21 +95,6 @@ message HelloRequest {
 							 (gogoproto.moretags) = "pg:\",array\", sql:\",pk\""];
 }
 
-message Permission {
-	// Tên của service (ví dụ 'blog')
-	required string service = 1 [(gogoproto.moretags) = "sql:\",pk\""];
-
-	// Các phương thức của service
-	required string method = 2 [(gogoproto.moretags) = "sql:\",pk\""];
-
-	// Mảng các quyền hạn (Role) cho phép truy cập vào method (nếu null tức là public method)
-	repeated int32 roles = 3 [(gogoproto.moretags) = "pg:\",array\""];
-
-	// Method có phải là public hay không
-	required bool is_public = 4;
-}
-
-
 message HelloResponse {
 	optional string greeting = 2;
 }
@@ -129,21 +114,21 @@ greeter.proto
 syntax = "proto2";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
-import "google/protobuf/descriptor.proto";
+import 'google/protobuf/descriptor.proto';
 
 extend google.protobuf.MethodOptions {
 	optional string description = 50056;
 	optional bool internalMethod = 50057;
 }
 
-service Greeter {
+service Greeter  {
 	rpc Hello(HelloRequest) returns (HelloResponse) {}
-	rpc GoodBye(HelloRequest) returns (HelloResponse) {}
-	rpc VuiQua(HelloRequest) returns (HelloResponse) {
-		option(description) = "VuiQua Day";
-		option(internalMethod) = false;
+	rpc GoodBye(HelloRequest) returns (HelloResponse) {
+		option(description) = "This is an internal goodbye method";
+		option(internalMethod) = true;
 	}
-}
+
+};
 
 ```
 
