@@ -15,13 +15,10 @@ func (g *Huy) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto.Hel
 }
 
 func (g *Huy) GoodBye(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
-
+	rsp.Greeting = "Goodbye " + req.Name
 	return nil
 }
 
-func (g *Huy) VuiQua(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
-	return nil
-}
 
 func main() {
 	service := micro.NewService(
