@@ -18,6 +18,7 @@ import fmt "fmt"
 import math "math"
 import _ "github.com/gogo/protobuf/gogoproto"
 import _ "github.com/golang/protobuf/protoc-gen-go/descriptor"
+import _ "github.com/gogo/protobuf/types"
 
 import (
 	client "github.com/micro/go-micro/client"

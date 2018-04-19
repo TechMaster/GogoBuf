@@ -5,6 +5,7 @@ import (
 	proto "github.com/TechMaster/GogoBuf/proto"
 	"github.com/micro/go-micro"
 	"log"
+	"time"
 )
 
 type Huy struct{}
@@ -16,6 +17,8 @@ func (g *Huy) Hello(ctx context.Context, req *proto.HelloRequest, rsp *proto.Hel
 
 func (g *Huy) GoodBye(ctx context.Context, req *proto.HelloRequest, rsp *proto.HelloResponse) error {
 	rsp.Greeting = "Goodbye " + req.Name
+	now := time.Now()
+	rsp.CreateDate = &now
 	return nil
 }
 
@@ -26,6 +29,7 @@ func main() {
 	)
 
 	service.Init()
+	service.Server()
 
 	proto.RegisterGreeterHandler(service.Server(), new(Huy))
 

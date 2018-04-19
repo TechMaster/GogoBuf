@@ -2,6 +2,7 @@ syntax = "proto2";
 
 import "github.com/gogo/protobuf/gogoproto/gogo.proto";
 import 'google/protobuf/descriptor.proto';
+import "google/protobuf/timestamp.proto";
 
 extend google.protobuf.MethodOptions {
 	optional string description = 50056;
@@ -24,4 +25,5 @@ message HelloRequest {
 }
 message HelloResponse {
 	optional string greeting = 2;
+	optional google.protobuf.Timestamp createDate = 3 [(gogoproto.stdtime) = true];
 }
